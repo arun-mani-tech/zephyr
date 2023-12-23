@@ -1,0 +1,32 @@
+/ {
+	leds {
+		compatible = "gpio-leds";
+		led0: led_0 {
+			gpios = <&gpio0 26 GPIO_ACTIVE_HIGH>;
+			label = "motor";
+		};
+	};
+
+	aliases {
+		led0 = &led0;
+	};
+};
+
+&spi2 {
+   can0: mcp2515@1 {
+                compatible = "microchip,mcp2515";
+                spi-max-frequency = <1000000>;
+                int-gpios = <&gpio0 27 GPIO_ACTIVE_LOW>;
+                status = "okay";
+                label = "CAN_0";
+                reg = <0x1>;
+                osc-freq = <25000000>;
+                bus-speed = <125000>;
+                sjw = <1>;
+                prop-seg = <8>;
+                phase-seg1 = <8>;
+                phase-seg2 = <3>;
+                #address-cells = <1>;
+                #size-cells = <0>;
+        };
+};
